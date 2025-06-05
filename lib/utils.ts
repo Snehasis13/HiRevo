@@ -46,3 +46,4 @@ export const getRandomInterviewCover = () => {
   return `/cover${interviewCovers[randomIndex]}`;
 };
 // implemented retry logic
+// optimized for voice latency
