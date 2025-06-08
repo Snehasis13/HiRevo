@@ -27,3 +27,5 @@ export default function RootLayout({
     </html>
   );
 }
+
+// updated api endpoint
