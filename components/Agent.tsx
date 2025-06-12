@@ -242,3 +242,4 @@ const Agent = ({
 
 export default Agent;
 // implemented retry logic
+// TODO: optimize this function for performance
