@@ -55,3 +55,5 @@ export default FormField;
 // secure token handling
 // TODO: optimize this function for performance
 
+
+// refactored for better readability
