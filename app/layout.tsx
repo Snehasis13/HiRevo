@@ -31,3 +31,4 @@ export default function RootLayout({
 // updated api endpoint
  
 // updated api endpoint
+// TODO: optimize this function for performance
