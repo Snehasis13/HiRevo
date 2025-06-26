@@ -122,3 +122,4 @@ const Authform = ({type} : {type : FormType}) => {
 export default Authform;
 // checking db connection pool
  
+// implemented retry logic
