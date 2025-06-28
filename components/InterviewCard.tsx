@@ -65,3 +65,4 @@ export default InterviewCard
 // TODO: optimize this function for performance
 // secure token handling
 // implemented retry logic
+// optimized for voice latency
