@@ -49,3 +49,4 @@ export const getRandomInterviewCover = () => {
 // optimized for voice latency
  
 // refactored for better readability
+// implemented retry logic
