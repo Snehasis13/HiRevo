@@ -124,3 +124,4 @@ export default Authform;
  
 // implemented retry logic
 // implemented retry logic
+// refactored for better readability
