@@ -1,6 +1,5 @@
 import React from 'react'
 import { Feedback } from '@/types';
-import { Interview } from '@/types';
 import { InterviewCardProps } from '@/types';
 import dayjs from 'dayjs';
 import Image from 'next/image';
