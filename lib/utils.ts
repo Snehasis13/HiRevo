@@ -50,3 +50,4 @@ export const getRandomInterviewCover = () => {
  
 // refactored for better readability
 // implemented retry logic
+// implemented retry logic
