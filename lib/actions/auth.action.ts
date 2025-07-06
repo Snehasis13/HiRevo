@@ -1,5 +1,5 @@
 'use server'
-import { SignUpParams, SignInParams, User } from "@/types";
+import { SignUpParams, SignInParams, User, Interview, GetLatestInterviewsParams } from "@/types";
 import {db, auth} from '@/firebase/admin';
 import {cookies} from 'next/headers';
 
@@ -118,4 +118,34 @@ export async function signOut() {
   const cookieStore = await cookies();
 
   cookieStore.delete("session");
+}
+
+export async function getInterviewsById(userId : string) : Promise<Interview[] | null>{
+  const interviews = await db
+  .collection('interviews')
+  .where('userId', '==',userId)
+  .orderBy('createdAt','desc')
+  .get();
+
+  return interviews.docs.map((doc) =>({
+    id : doc.id,
+    ...doc.data()
+  })) as Interview[];
+}
+
+export async function getLatestInterviews(params : GetLatestInterviewsParams) : Promise<Interview[] | null>{
+
+  const {userId, limit=20} = params;
+
+  const interviews = await db
+  .collection('interviews')
+  .orderBy('createdAt','desc')
+  .where('finalized', '==', true)
+  .where('userId','!=',userId)
+  .get()
+
+  return interviews.docs.map((doc) =>({
+    id : doc.id,
+    ...doc.data()
+  })) as Interview[];
 }

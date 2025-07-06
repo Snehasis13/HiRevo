@@ -25,13 +25,14 @@ export async function POST(request: Request) {
     `,
     });
 
+    const safeTechstack = typeof techstack === "string" ? techstack.split(",") : [];
+
+
     const interview = {
       role: role,
       type: type,
       level: level,
-      techstack: typeof techstack === "string"
-        ? techstack.split(",").map(s => s.trim()).filter(Boolean)
-        : [],
+      techstack: safeTechstack,
       questions: JSON.parse(questions),
       userId: userid,
       finalized: true,
