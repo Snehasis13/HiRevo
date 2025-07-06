@@ -1,5 +1,5 @@
 'use server'
-import { SignUpParams, SignInParams, User, Interview, GetLatestInterviewsParams } from "@/types";
+import { SignUpParams, SignInParams, User } from "@/types";
 import {db, auth} from '@/firebase/admin';
 import {cookies} from 'next/headers';
 
@@ -52,7 +52,7 @@ export async function setSessionCookie(idToken : string){
         expiresIn : one_week*1000
     })
 
-    cookieStore.set("session", sessionCookie, {
+    cookieStore.set("__session", sessionCookie, {
     maxAge: one_week,
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
@@ -86,7 +86,7 @@ export async function signIn(params: SignInParams) {
 export async function getCurrentUser(): Promise<User | null> {
   const cookieStore = await cookies();
 
-  const sessionCookie = cookieStore.get("session")?.value;
+  const sessionCookie = cookieStore.get("__session")?.value;
   if (!sessionCookie) return null;
 
   try {
@@ -109,43 +109,21 @@ export async function getCurrentUser(): Promise<User | null> {
   }
 }
 
-export async function isAuthenticated() {
-  const user = await getCurrentUser();
-  return !!user;
-}
+export const isAuthenticated = async () => {
+  const sessionCookie = (await cookies()).get('__session')?.value;
+  if (!sessionCookie) return false;
+
+  try {
+    const decoded = await auth.verifySessionCookie(sessionCookie, true);
+    return !!decoded;
+  } catch (err) {
+    return false;
+  }
+};
 
 export async function signOut() {
   const cookieStore = await cookies();
 
-  cookieStore.delete("session");
+  cookieStore.delete("__session");
 }
 
-export async function getInterviewsById(userId : string) : Promise<Interview[] | null>{
-  const interviews = await db
-  .collection('interviews')
-  .where('userId', '==',userId)
-  .orderBy('createdAt','desc')
-  .get();
-
-  return interviews.docs.map((doc) =>({
-    id : doc.id,
-    ...doc.data()
-  })) as Interview[];
-}
-
-export async function getLatestInterviews(params : GetLatestInterviewsParams) : Promise<Interview[] | null>{
-
-  const {userId, limit=20} = params;
-
-  const interviews = await db
-  .collection('interviews')
-  .orderBy('createdAt','desc')
-  .where('finalized', '==', true)
-  .where('userId','!=',userId)
-  .get()
-
-  return interviews.docs.map((doc) =>({
-    id : doc.id,
-    ...doc.data()
-  })) as Interview[];
-}

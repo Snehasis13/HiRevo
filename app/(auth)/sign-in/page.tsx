@@ -1,10 +1,14 @@
-import Authform from '@/components/Authform'
-import React from 'react'
+import Authform from '@/components/Authform';
+import React from 'react';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 const page = () => {
   return (
-    <Authform type="sign-in" />
-  )
-}
+    <div>
+      <Authform type="sign-in" />
+    </div>
+  );
+};
 
-export default page
+export default page;
