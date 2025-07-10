@@ -33,3 +33,4 @@ export default function RootLayout({
 // updated api endpoint
 // TODO: optimize this function for performance
 // checking db connection pool
+// cached result
