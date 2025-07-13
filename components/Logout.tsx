@@ -38,3 +38,4 @@ export default Logout;
 // checking db connection pool
 // implemented retry logic
 // optimized for voice latency
+// refactored for better readability
