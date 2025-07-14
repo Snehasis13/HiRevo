@@ -16,7 +16,7 @@ const rootlayout = async ({children} : {children : ReactNode}) => {
       <nav className='relative'>
         <Link href='/' className='flex items-center gap-2'>
         <Image src="/logo.png" alt="Logo" width={50} height={50}></Image>
-        <h2 className='text-primary-100'>HiRevo</h2>
+        <h2 className='text-primary-100'>HiRévo</h2>
         </Link>
         <div className="absolute top-0 right-0">
           <Logout />
