@@ -34,3 +34,4 @@ export default function RootLayout({
 // TODO: optimize this function for performance
 // checking db connection pool
 // cached result
+// implemented retry logic
