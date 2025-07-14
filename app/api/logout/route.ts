@@ -14,3 +14,4 @@ export async function POST() {
 // TODO: optimize this function for performance
  
 // refactored for better readability
+// secure token handling
