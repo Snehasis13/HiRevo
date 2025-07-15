@@ -11,3 +11,4 @@ const nextConfig: NextConfig = {
 
 export default nextConfig;
 // checking db connection pool
+// updated api endpoint
