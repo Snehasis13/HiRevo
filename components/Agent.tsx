@@ -249,3 +249,4 @@ export default Agent;
 
 
 // refactored for better readability
+// secure token handling
