@@ -55,3 +55,4 @@
 
 // checking db connection pool
 // TODO: optimize this function for performance
+// secure token handling
