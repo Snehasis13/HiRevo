@@ -16,3 +16,4 @@ export async function POST() {
 // refactored for better readability
 // secure token handling
 // optimized for voice latency
+// updated api endpoint
