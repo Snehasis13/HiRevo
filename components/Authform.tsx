@@ -130,3 +130,4 @@ export default Authform;
 // cached result
 // implemented retry logic
 // cached result
+// TODO: optimize this function for performance
