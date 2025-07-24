@@ -133,3 +133,4 @@ export default Authform;
 // TODO: optimize this function for performance
 // checking db connection pool
 // updated api endpoint
+// secure token handling
