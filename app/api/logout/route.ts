@@ -17,3 +17,4 @@ export async function POST() {
 // secure token handling
 // optimized for voice latency
 // updated api endpoint
+// cached result
