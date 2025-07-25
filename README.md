@@ -42,3 +42,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
  
 // refactored for better readability
 // implemented retry logic
+// implemented retry logic
