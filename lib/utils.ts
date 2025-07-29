@@ -54,3 +54,4 @@ export const getRandomInterviewCover = () => {
 // TODO: optimize this function for performance
 // secure token handling
 // cached result
+// implemented retry logic
