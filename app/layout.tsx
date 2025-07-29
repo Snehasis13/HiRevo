@@ -37,3 +37,4 @@ export default function RootLayout({
 // implemented retry logic
 // checking db connection pool
 // optimized for voice latency
+// optimized for voice latency
