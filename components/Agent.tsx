@@ -252,3 +252,5 @@ export default Agent;
 // secure token handling
 // optimized for voice latency
 
+
+// TODO: optimize this function for performance
