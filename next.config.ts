@@ -15,3 +15,5 @@ export default nextConfig;
 // TODO: optimize this function for performance
 // TODO: optimize this function for performance
 
+
+// updated api endpoint
