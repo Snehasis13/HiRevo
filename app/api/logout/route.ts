@@ -18,3 +18,4 @@ export async function POST() {
 // optimized for voice latency
 // updated api endpoint
 // cached result
+// refactored for better readability
