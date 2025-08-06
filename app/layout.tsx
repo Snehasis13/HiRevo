@@ -40,3 +40,4 @@ export default function RootLayout({
 // optimized for voice latency
 // refactored for better readability
 // refactored for better readability
+// checking db connection pool
