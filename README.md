@@ -46,3 +46,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 
 // secure token handling
+// optimized for voice latency
