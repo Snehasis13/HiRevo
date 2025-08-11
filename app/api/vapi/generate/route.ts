@@ -63,3 +63,4 @@ export async function GET() {
  
 // cached result
 // checking db connection pool
+// TODO: optimize this function for performance
