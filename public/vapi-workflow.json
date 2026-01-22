@@ -1,0 +1,157 @@
+{
+    "name": "S_Interviewer",
+    "globalPrompt": "You are a voice assistant helping with creating new AI interviewers. Your task is to collect data from the user. Remember that this is a voice conversation - do not use any special characters.",
+    "nodes": [
+        {
+            "name": "introduction",
+            "type": "conversation",
+            "isStart": true,
+            "metadata": {
+                "position": {
+                    "x": -346,
+                    "y": -245.93295511975793
+                }
+            },
+            "prompt": "You are a helpful assistant",
+            "model": {
+                "model": "gpt-4o",
+                "provider": "openai",
+                "maxTokens": 250,
+                "temperature": 0.3
+            },
+            "voice": {
+                "voiceId": "Cole",
+                "provider": "vapi"
+            },
+            "messagePlan": {
+                "firstMessage": "Hello {{username}}! Let's prepare your interview. I'll ask you few questions and generate a perfect interview just for you. Are you ready?"
+            },
+            "variableExtractionPlan": {
+                "output": [
+                    {
+                        "title": "role",
+                        "type": "string",
+                        "description": "What role would you like to train for ?"
+                    },
+                    {
+                        "title": "type",
+                        "type": "string",
+                        "description": "Are you aiming for a technical, behavioral or mixed interview?"
+                    },
+                    {
+                        "title": "level",
+                        "type": "string",
+                        "description": "What will be the job experience level ?"
+                    },
+                    {
+                        "title": "techstack",
+                        "type": "string",
+                        "description": "Tell me about the list of technologies to cover during the job interview"
+                    },
+                    {
+                        "title": "amount",
+                        "type": "string",
+                        "description": "How many questions would you like me to prepare for you?"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "apiRequest_generateInterview",
+            "type": "tool",
+            "metadata": {
+                "position": {
+                    "x": -329.8928211148566,
+                    "y": 148.21083011749505
+                }
+            },
+            "tool": {
+                "type": "apiRequest",
+                "method": "POST",
+                "url": "https://inter-viewer.vercel.app/api/vapi/generate",
+                "messages": [
+                    {
+                        "type": "request-start",
+                        "content": "Please hold on. I am sending a request to the app.",
+                        "blocking": true
+                    },
+                    {
+                        "type": "request-complete",
+                        "content": "The request has been sent and your interview has been generated. Thank you for the call. Bye",
+                        "role": "assistant",
+                        "endCallAfterSpokenEnabled": false
+                    },
+                    {
+                        "type": "request-failed",
+                        "content": "Oops! Looks like something went wrong when sending the data to the app. Please try again.",
+                        "endCallAfterSpokenEnabled": false
+                    }
+                ],
+                "body": {
+                    "type": "object",
+                    "required": [
+                        "role",
+                        "type",
+                        "level",
+                        "techstack",
+                        "amount",
+                        "userid"
+                    ],
+                    "properties": {
+                        "role": {
+                            "type": "string",
+                            "value": "{{role}}"
+                        },
+                        "type": {
+                            "type": "string",
+                            "value": "{{type}}"
+                        },
+                        "level": {
+                            "type": "string",
+                            "value": "{{level}}"
+                        },
+                        "techstack": {
+                            "type": "string",
+                            "value": "{{techstack}}"
+                        },
+                        "amount": {
+                            "type": "string",
+                            "value": "{{amount}}"
+                        },
+                        "userid": {
+                            "type": "string",
+                            "value": "{{userid}}"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "hangup_after_api",
+            "type": "tool",
+            "metadata": {
+                "position": {
+                    "x": -337.9385461281289,
+                    "y": 436.3372674342787
+                }
+            },
+            "tool": {
+                "type": "endCall"
+            }
+        }
+    ],
+    "edges": [
+        {
+            "from": "introduction",
+            "to": "apiRequest_generateInterview",
+            "condition": {
+                "type": "ai",
+                "prompt": "When all required information has been collected"
+            }
+        },
+        {
+            "from": "apiRequest_generateInterview",
+            "to": "hangup_after_api"
+        }
+    ]
+}

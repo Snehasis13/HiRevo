@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { toast } from "sonner";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { AgentProps } from "@/types";
@@ -63,6 +64,7 @@ const Agent = ({
 
     const onError = (error: Error) => {
       console.log("Error:", error);
+      toast.error("An error occurred with the voice agent. Please try again.");
     };
 
     vapi.on("call-start", onCallStart);
@@ -88,35 +90,35 @@ const Agent = ({
     }
 
     const handleGenerateFeedback = async (messages: SavedMessage[]) => {
-  console.log("handleGenerateFeedback");
+      console.log("handleGenerateFeedback");
 
-  try {
-    const response = await createFeedback({
-      interviewId: interviewId!,
-      userId: userId!,
-      transcript: messages,
-      feedbackId,
-    });
+      try {
+        const response = await createFeedback({
+          interviewId: interviewId!,
+          userId: userId!,
+          transcript: messages,
+          feedbackId,
+        });
 
-    if (!response) {
-      console.error("createFeedback returned null/undefined");
-      router.push("/");
-      return;
-    }
+        if (!response) {
+          console.error("createFeedback returned null/undefined");
+          router.push("/");
+          return;
+        }
 
-    const { success, feedbackId: id } = response;
+        const { success, feedbackId: id } = response;
 
-    if (success && id) {
-      router.push(`/interview/${interviewId}/feedback`);
-    } else {
-      console.log("Error saving feedback");
-      router.push("/");
-    }
-  } catch (err) {
-    console.error("Exception in createFeedback:", err);
-    router.push("/");
-  }
-};
+        if (success && id) {
+          router.push(`/interview/${interviewId}/feedback`);
+        } else {
+          console.log("Error saving feedback");
+          router.push("/");
+        }
+      } catch (err) {
+        console.error("Exception in createFeedback:", err);
+        router.push("/");
+      }
+    };
 
 
     if (callStatus === CallStatus.FINISHED) {

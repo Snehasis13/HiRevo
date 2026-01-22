@@ -49,12 +49,3 @@
     "typescript": "^5"
   }
 }
-
-// checking db connection pool
-
-
-// checking db connection pool
-// TODO: optimize this function for performance
-// secure token handling
-// cached result
-// checking db connection pool

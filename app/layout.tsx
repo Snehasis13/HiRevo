@@ -28,17 +28,3 @@ export default function RootLayout({
   );
 }
 
-// updated api endpoint
- 
-// updated api endpoint
-// TODO: optimize this function for performance
-// checking db connection pool
-// cached result
-// implemented retry logic
-// checking db connection pool
-// optimized for voice latency
-// optimized for voice latency
-// refactored for better readability
-// refactored for better readability
-// checking db connection pool
- 
