@@ -97,6 +97,8 @@ export async function getLatestInterviews(
 ): Promise<Interview[] | null> {
   const { userId, limit = 20 } = params;
 
+  if (!userId) return null;
+
   const interviews = await db
     .collection("interviews")
     .orderBy("createdAt", "desc")
@@ -114,6 +116,7 @@ export async function getLatestInterviews(
 export async function getInterviewsById(
   userId: string
 ): Promise<Interview[] | null> {
+  if (!userId) return null;
   const interviews = await db
     .collection("interviews")
     .where("userId", "==", userId)
